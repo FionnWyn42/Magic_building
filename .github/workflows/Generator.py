@@ -105,7 +105,7 @@ element_colors = {
 
 
     
-elm = list(element_colors.values())
+elm = list(element_colors.keys())
 
 st.set_page_config(page_title="Random Regular Graph Generator", layout="centered")
 
@@ -141,7 +141,7 @@ if st.button("Generate Graph"):
 
             # Draw graph
             fig, ax = plt.subplots(figsize=(6, 6))
-            nx.draw_circular(G, with_labels=True, edge_color="gray", node_size=nsize, ax=ax)
+            nx.draw_circular(G, with_labels=True, node_color = node_colours, edge_color="gray", node_size=nsize, ax=ax)
             st.pyplot(fig)
 
             # Downloadable image
