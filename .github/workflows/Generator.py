@@ -2,6 +2,7 @@ import streamlit as st
 import networkx as nx
 import matplotlib.pyplot as plt
 import io
+import random
 
 element_colors = {
     "Fire": "red",
@@ -120,6 +121,10 @@ This app generates a **random regular graph** based on the number of nodes (`n`)
 n = st.number_input("Number of nodes (n)", min_value=1, value=10)
 d = st.number_input("Degree of each node (d)", min_value=0, value=2)
 nsize = st.number_input("Degree of each node (d)", min_value=0, value=9000)
+
+use_seed = st.sidebar.checkbox("Use seed")
+seed_val = st.sidebar.number_input("Seed value", min_value=0, value=42, step=1, disabled=not use_seed)
+
 # Button to generate graph
 if st.button("Generate Graph"):
     # Check if a regular graph is possible
@@ -129,8 +134,13 @@ if st.button("Generate Graph"):
         st.error("❌ Invalid input: Degree must be less than the number of nodes.")
     else:
         try:
-            G = nx.random_regular_graph(d, n)
-
+            if use_seed:
+                random.seed(seed_val)
+                G = nx.random_regular_graph(d, n, seed=seed_val)
+            else:
+                G = nx.random_regular_graph(d, n)
+    
+            random.shuffle(elm)
             mapping =dict(zip(list(G.nodes), elm[0:n]))
             G = nx.relabel_nodes(G, mapping)
 
