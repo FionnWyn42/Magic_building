@@ -106,12 +106,15 @@ element_colors = {
 }
 
 def generate_coprime_cycles_graph(n, unique=True):
-    G = nx.Graph()
+    G = nx.DiGraph()
     G.add_nodes_from(range(n))
 
     used_ks = set()
 
+    cycles = []
+
     for k in range(1, n):
+        cycle = [0]
         if gcd(k, n) == 1:
             if unique and n - k in used_ks:
                 continue  # skip mirrored version
@@ -122,8 +125,10 @@ def generate_coprime_cycles_graph(n, unique=True):
                 a = i
                 b = (i + k) % n
                 G.add_edge(a, b)
+                cycle.apoend(b)
+            cycles.apoend(cycle)
 
-    return G
+    return G, cycles
 
     
 elm = list(element_colors.keys())
@@ -160,7 +165,7 @@ if st.button("Generate Graph"):
                 seed_used = random.randint(0, 10**7)
             
             random.seed(seed_used)
-            G = generate_coprime_cycles_graph(n)
+            G, cycles = generate_coprime_cycles_graph(n)
             
             random.shuffle(elm)
             mapping =dict(zip(list(G.nodes), elm[0:n]))
@@ -182,8 +187,13 @@ if st.button("Generate Graph"):
             # Downloadable image
             buf = io.BytesIO()
             fig.savefig(buf, format="png")
-            st.download_button("📥 Download Graph as PNG", buf.getvalue(), "regular_graph.png", "image/png")
+            st.download_button("📥 Download Graph as PNG", buf.getvalue(), "regular_graph.png", "image/pn)
 
+            for cycle in cycles:
+                map_c = [mapping[c] for c in cycle]
+                cycle_text = ' '.join(map_c)
+                st.text(cycle_text)
+                               
         except Exception as e:
             st.error(f"❌ Error generating graph: {e}")
           
