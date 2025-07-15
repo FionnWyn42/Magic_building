@@ -125,8 +125,8 @@ def generate_coprime_cycles_graph(n, unique=True):
                 a = i
                 b = (i + k) % n
                 G.add_edge(a, b)
-                cycle.apoend(b)
-            cycles.apoend(cycle)
+                cycle.append(b)
+            cycles.append(cycle)
 
     return G, cycles
 
