@@ -119,7 +119,7 @@ This app generates a **random regular graph** based on the number of nodes (`n`)
 # User input
 n = st.number_input("Number of nodes (n)", min_value=1, value=10)
 d = st.number_input("Degree of each node (d)", min_value=0, value=2)
-
+nsize = st.number_input("Degree of each node (d)", min_value=0, value=9000)
 # Button to generate graph
 if st.button("Generate Graph"):
     # Check if a regular graph is possible
@@ -141,7 +141,7 @@ if st.button("Generate Graph"):
 
             # Draw graph
             fig, ax = plt.subplots(figsize=(6, 6))
-            nx.draw_circular(G, with_labels=True, node_color=node_colours, edge_color="gray", node_size=700, ax=ax)
+            nx.draw_circular(G, with_labels=True, edge_color="gray", node_size=nsize, ax=ax)
             st.pyplot(fig)
 
             # Downloadable image
