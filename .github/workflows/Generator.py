@@ -188,10 +188,19 @@ if st.button("Generate Graph"):
             buf = io.BytesIO()
             fig.savefig(buf, format="png")
             st.download_button("📥 Download Graph as PNG", buf.getvalue(), "regular_graph.png", "image/pn")
-
-            for cycle in cycles:
+            cycle_names = [
+           "generating",
+           "overcoming",
+           "absorbing",
+           "balancing",
+           "draining",
+           "transforming"
+             ]
+            for j, cycle in enmuerate(cycles):
                 map_c = [mapping[c] for c in cycle]
-                cycle_text = ' '.join(map_c)
+                
+                cycle_text = ' ->  '.join(map_c)
+                st.text(cycle_names[j%len(cycle_names)])
                 st.text(cycle_text)
                                
         except Exception as e:
