@@ -121,11 +121,12 @@ def generate_coprime_cycles_graph(n, unique=True):
             used_ks.add(k)
 
             # Connect nodes in a cycle with step size k
+            a = 0
             for i in range(n):
-                a = i
-                b = (i + k) % n
+                b = (a + k) % n
                 G.add_edge(a, b)
                 cycle.append(b)
+                a = b
             cycles.append(cycle)
 
     return G, cycles
