@@ -1,4 +1,4 @@
-import streamlit as st
+iimport streamlit as st
 import networkx as nx
 import matplotlib.pyplot as plt
 import io
@@ -187,7 +187,7 @@ if st.button("Generate Graph"):
             # Downloadable image
             buf = io.BytesIO()
             fig.savefig(buf, format="png")
-            st.download_button("📥 Download Graph as PNG", buf.getvalue(), "regular_graph.png", "image/pn)
+            st.download_button("📥 Download Graph as PNG", buf.getvalue(), "regular_graph.png", "image/pn")
 
             for cycle in cycles:
                 map_c = [mapping[c] for c in cycle]
