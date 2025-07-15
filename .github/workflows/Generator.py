@@ -130,12 +130,12 @@ if st.button("Generate Graph"):
             G = nx.random_regular_graph(d, n)
 
             mapping =dict(zip(list(G.nodes), elm[0:n]))
-            nx.relabel_nodes(G, mapping)
+            G = nx.relabel_nodes(G, mapping)
 
             node_colours = []
 
-            for n in G.nodes:
-                node_colours.append(element_colors[n])
+            for node in G.nodes:
+                node_colours.append(element_colors[node])
 
             # Draw graph
             fig, ax = plt.subplots(figsize=(6, 6))
