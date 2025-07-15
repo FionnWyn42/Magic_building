@@ -135,11 +135,12 @@ if st.button("Generate Graph"):
     else:
         try:
             if use_seed:
-                random.seed(seed_val)
-                G = nx.random_regular_graph(d, n, seed=seed_val)
+                seed_used = seed_val 
             else:
-                G = nx.random_regular_graph(d, n)
-    
+                seed_used = random.randint(0, 10**7)
+            
+            random.seed(seed_used)
+            G = nx.random_regular_graph(d, n, seed=seed_val)
             random.shuffle(elm)
             mapping =dict(zip(list(G.nodes), elm[0:n]))
             G = nx.relabel_nodes(G, mapping)
@@ -153,6 +154,9 @@ if st.button("Generate Graph"):
             fig, ax = plt.subplots(figsize=(6, 6))
             nx.draw_circular(G, with_labels=True, node_color = node_colours, edge_color="gray", node_size=nsize, ax=ax)
             st.pyplot(fig)
+
+            st.success(f"Seed used: `{seed_used}`")
+            st.code(f"{seed_used}", language="python")
 
             # Downloadable image
             buf = io.BytesIO()
