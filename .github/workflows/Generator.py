@@ -187,8 +187,10 @@ if st.button("Generate Graph"):
             
             random.seed(seed_used)
             G, cycles = generate_coprime_cycles_graph(n)
-            
-            random.shuffle(elm)
+
+            if method == 'Random':
+                random.shuffle(elm)
+        
             mapping =dict(zip(list(G.nodes), elm[0:n]))
             G = nx.relabel_nodes(G, mapping)
 
