@@ -196,7 +196,7 @@ if st.button("Generate Graph"):
            "draining",
            "transforming"
              ]
-            for j, cycle in enmuerate(cycles):
+            for j, cycle in enumerate(cycles):
                 map_c = [mapping[c] for c in cycle]
                 
                 cycle_text = ' ->  '.join(map_c)
