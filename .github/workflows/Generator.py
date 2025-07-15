@@ -158,6 +158,7 @@ else:
     elements = [e.strip().title() for e in element_input.split(",")]
     
     if color_input.strip() == "":
+        available_colors = list(element_colours.values())
         colors = random.sample(available_colors, len(elements))
     else:
         colors = [c.strip().lower() for c in color_input.split(",")]
