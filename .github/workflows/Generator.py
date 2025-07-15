@@ -131,7 +131,7 @@ def generate_coprime_cycles_graph(n, unique=True):
     return G, cycles
 
     
-elm = list(element_colors.keys())
+
 
 st.set_page_config(page_title="Random Regular Graph Generator", layout="centered")
 
@@ -142,9 +142,33 @@ This app generates a **random regular graph** based on the number of nodes (`n`)
 - A *d*-regular graph is one where each node has exactly *d* connections.
 """)
 
+method = st.radio("Choose how to define elements:", ["Random", "Custom Input"])
+
+if method == 'Random':
+
 # User input
-n = st.number_input("Number of nodes (n)", min_value=1, value=10)
-d = st.number_input("Degree of each node (d)", min_value=0, value=2)
+    n = st.number_input("Number of nodes (n)", min_value=1, value=10)
+    d = st.number_input("Degree of each node (d)", min_value=0, value=2)
+    elm = list(element_colors.keys())
+
+else:
+    element_input = st.text_input("Enter elements (comma-separated)", "Fire,Water,Earth,Air")
+    color_input = st.text_input("Enter colors (comma-separated or leave blank for random)", "")
+
+    elements = [e.strip().title() for e in element_input.split(",")]
+    
+    if color_input.strip() == "":
+        colors = random.sample(available_colors, len(elements))
+    else:
+        colors = [c.strip().lower() for c in color_input.split(",")]
+
+    if len(elements) != len(colors):
+        st.error("Please ensure the number of elements matches the number of colors.")
+        st.stop()
+
+     elm = elements
+     element_colors = dict(zip(elm, colors))
+
 nsize = st.number_input("Degree of each node (d)", min_value=0, value=2000)
 
 use_seed = st.sidebar.checkbox("Use seed")
