@@ -3,106 +3,77 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import io
 
-element_colors = {
-    "Fire": "#FF4500",       # orange-red
-    "Water": "#1E90FF",      # dodger blue
-    "Earth": "#8B4513",      # saddle brown
-    "Air": "#87CEEB",        # sky blue
-    "Light": "#FFFFE0",      # light yellow
-    "Dark": "#2F4F4F",       # dark slate gray
-    "Metal": "#B0C4DE",      # light steel blue
-    "Crystal": "#E0FFFF",    # light cyan
-    "Ice": "#AFEEEE",        # pale turquoise
-    "Lightning": "#FFD700",  # gold
-    "Steam": "#D3D3D3",      # light gray
-    "Magma": "#FF6347",      # tomato red
-    "Shadow": "#696969",     # dim gray
-    "Holy": "#FFF8DC",       # cornsilk
-    "Poison": "#7FFF00",     # chartreuse
-    "Nature": "#228B22",     # forest green
-    "Void": "#4B0082",       # indigo
-    "Chaos": "#DA70D6",      # orchid
-    "Order": "#F5F5DC",      # beige
-    "Plasma": "#FF69B4",     # hot pink
-    "Wood": "#DEB887",       # burlywood
-    "Glass": "#E6E6FA",      # lavender
-    "Sand": "#F4A460",       # sandy brown
-    "Ash": "#A9A9A9",        # dark gray
-    "Smoke": "#708090",      # slate gray
-    "Aether": "#BA55D3",     # medium orchid
-    "Blood": "#8B0000",      # dark red
-    "Spirit": "#9370DB",     # medium purple
-    "Sound": "#20B2AA",      # light sea green
-    "Energy": "#FFA500",     # orange
-    "Radiance": "#FFFACD",   # lemon chiffon
-    "Frost": "#E0FFFF",      # light cyan
-    "Corruption": "#8B008B", # dark magenta
-    "Dream": "#D8BFD8",      # thistle
-    "Gravity": "#696969",    # dim gray
-    "Echo": "#C0C0C0",       # silver
-    "Pulse": "#FF1493",      # deep pink
-    "Acid": "#ADFF2F",       # green yellow
-    "Venom": "#9ACD32",      # yellow green
-    "Flame": "#FF6347",      # tomato
-    "Mist": "#F5F5F5",       # white smoke
-    "Obsidian": "#2E2E2E",   # dark charcoal
-    "Lava": "#FF4500",       # orange red
-    "Storm": "#708090",      # slate gray
-    "Stone": "#A0522D",      # sienna
-    "Fog": "#DCDCDC",        # gainsboro
-    "Quake": "#BC8F8F",      # rosy brown
-    "Ink": "#191970",        # midnight blue
-    "Force": "#7B68EE",      # medium slate blue
-    "Moon": "#F0E68C",       # khaki
-    "Sun": "#FFD700",        # gold
-    "Star": "#FFFACD",       # lemon chiffon
-    "Dust": "#D2B48C",       # tan
-    "Ether": "#8A2BE2",      # blue violet
-    "Spark": "#FF8C00",      # dark orange
-    "Chill": "#AFEEEE",      # pale turquoise
-    "Metallic": "#B0C4DE",   # light steel blue
-    "Gale": "#ADD8E6",       # light blue
-    "Thorn": "#556B2F",      # dark olive green
-    "Toxin": "#6B8E23",      # olive drab
-    "Arcane": "#9370DB",     # medium purple
-    "Blessing": "#FFFACD",   # lemon chiffon
-    "Curse": "#4B0082",      # indigo
-    "Fear": "#696969",       # dim gray
-    "Hope": "#F0FFF0",       # honeydew
-    "Glory": "#FFD700",      # gold
-    "Decay": "#8B4513",      # brown
-    "Silence": "#C0C0C0",    # silver
-    "Illusion": "#E6E6FA",   # lavender
-    "Reality": "#F5F5DC",    # beige
-    "Time": "#A9A9A9",       # dark gray
-    "Space": "#483D8B",      # dark slate blue
-    "Memory": "#FFE4E1",     # misty rose
-    "Glow": "#FFF8DC",       # cornsilk
-    "Rift": "#8A2BE2",       # blue violet
-    "Nether": "#2F4F4F",     # dark slate gray
-    "Specter": "#778899",    # light slate gray
-    "Flare": "#FF7F50",      # coral
-    "Breeze": "#AFEEEE",     # pale turquoise
-    "Haze": "#D3D3D3",       # light gray
-    "Blight": "#556B2F",     # dark olive green
-    "Wisp": "#F0F8FF",       # alice blue
-    "Tide": "#4682B4",       # steel blue
-    "Tempest": "#708090",    # slate gray
-    "Whirlwind": "#ADD8E6",  # light blue
-    "Charm": "#FFB6C1",      # light pink
-    "Envy": "#7FFF00",       # chartreuse
-    "Greed": "#9ACD32",      # yellow green
-    "Wrath": "#B22222",      # firebrick
-    "Lust": "#DC143C",       # crimson
-    "Serenity": "#E0FFFF",   # light cyan
-    "Unity": "#F0FFF0",      # honeydew
-    "Balance": "#F5F5F5",    # white smoke
-    "Fate": "#DDA0DD",       # plum
-    "Truth": "#FFFFF0",      # ivory
-    "Myth": "#E6E6FA",       # lavender
-    "Shatter": "#DCDCDC"     # gainsboro
+
+element_colors_named = {
+    "Fire": "orangered",
+    "Water": "dodgerblue",
+    "Earth": "saddlebrown",
+    "Air": "skyblue",
+    "Light": "lightyellow",
+    "Dark": "dimgray",
+    "Metal": "lightsteelblue",
+    "Crystal": "lightcyan",
+    "Ice": "paleturquoise",
+    "Lightning": "gold",
+    "Steam": "lightgray",
+    "Magma": "tomato",
+    "Shadow": "gray",
+    "Holy": "cornsilk",
+    "Poison": "chartreuse",
+    "Nature": "forestgreen",
+    "Void": "indigo",
+    "Chaos": "orchid",
+    "Order": "beige",
+    "Plasma": "hotpink",
+    "Wood": "burlywood",
+    "Glass": "lavender",
+    "Sand": "sandybrown",
+    "Ash": "darkgray",
+    "Smoke": "slategray",
+    "Aether": "mediumorchid",
+    "Blood": "darkred",
+    "Spirit": "mediumpurple",
+    "Sound": "mediumseagreen",
+    "Energy": "orange",
+    "Radiance": "lemonchiffon",
+    "Frost": "powderblue",
+    "Corruption": "darkmagenta",
+    "Dream": "thistle",
+    "Gravity": "dimgray",
+    "Echo": "silver",
+    "Pulse": "deeppink",
+    "Acid": "greenyellow",
+    "Venom": "yellowgreen",
+    "Flame": "tomato",
+    "Mist": "whitesmoke",
+    "Obsidian": "black",
+    "Lava": "orangered",
+    "Storm": "slategray",
+    "Stone": "sienna",
+    "Fog": "gainsboro",
+    "Quake": "rosybrown",
+    "Ink": "midnightblue",
+    "Force": "mediumslateblue",
+    "Moon": "khaki",
+    "Sun": "gold",
+    "Star": "lightgoldenrodyellow",
+    "Dust": "tan",
+    "Ether": "blueviolet",
+    "Spark": "darkorange",
+    "Chill": "paleturquoise",
+    "Metallic": "lightsteelblue",
+    "Gale": "lightblue",
+    "Thorn": "darkolivegreen",
+    "Toxin": "olivedrab",
+    "Arcane": "mediumpurple",
+    "Blessing": "lemonchiffon",
+    "Curse": "indigo",
+    "Fear": "gray",
+    "Hope": "honeydew",
+    "Glory": "gold",
 }
 
+    
 elm = list(element_colors.values())
 
 st.set_page_config(page_title="Random Regular Graph Generator", layout="centered")
