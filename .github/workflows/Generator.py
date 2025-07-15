@@ -129,7 +129,7 @@ if st.button("Generate Graph"):
         try:
             G = nx.random_regular_graph(d, n)
 
-            mapping =dict(zip(list(G.nodes, elm[0:n])))
+            mapping =dict(zip(list(G.nodes), elm[0:n]))
             nx.relabel_nodes(G, mapping)
 
             node_colours = []
