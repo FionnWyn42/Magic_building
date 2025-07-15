@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import io
 
 
-element_colors_named = {
+element_colors = {
     "Fire": "orangered",
     "Water": "dodgerblue",
     "Earth": "saddlebrown",
