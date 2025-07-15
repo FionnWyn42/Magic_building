@@ -166,8 +166,8 @@ else:
         st.error("Please ensure the number of elements matches the number of colors.")
         st.stop()
 
-     elm = elements
-     element_colors = dict(zip(elm, colors))
+    elm = elements
+    element_colors = dict(zip(elm, colors))
 
 nsize = st.number_input("Degree of each node (d)", min_value=0, value=2000)
 
