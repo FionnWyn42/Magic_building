@@ -3,6 +3,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import io
 import random
+from math import gcd
 
 element_colors = {
     "Fire": "red",
