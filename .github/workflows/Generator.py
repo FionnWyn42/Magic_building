@@ -145,7 +145,7 @@ This app generates a **random regular graph** based on the number of nodes (`n`)
 # User input
 n = st.number_input("Number of nodes (n)", min_value=1, value=10)
 d = st.number_input("Degree of each node (d)", min_value=0, value=2)
-nsize = st.number_input("Degree of each node (d)", min_value=0, value=9000)
+nsize = st.number_input("Degree of each node (d)", min_value=0, value=2000)
 
 use_seed = st.sidebar.checkbox("Use seed")
 seed_val = st.sidebar.number_input("Seed value", min_value=0, value=42, step=1, disabled=not use_seed)
