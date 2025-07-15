@@ -104,6 +104,25 @@ element_colors = {
     "Shatter": "gainsboro"
 }
 
+def generate_coprime_cycles_graph(n, unique=True):
+    G = nx.Graph()
+    G.add_nodes_from(range(n))
+
+    used_ks = set()
+
+    for k in range(1, n):
+        if gcd(k, n) == 1:
+            if unique and n - k in used_ks:
+                continue  # skip mirrored version
+            used_ks.add(k)
+
+            # Connect nodes in a cycle with step size k
+            for i in range(n):
+                a = i
+                b = (i + k) % n
+                G.add_edge(a, b)
+
+    return G
 
     
 elm = list(element_colors.keys())
@@ -140,7 +159,8 @@ if st.button("Generate Graph"):
                 seed_used = random.randint(0, 10**7)
             
             random.seed(seed_used)
-            G = nx.random_regular_graph(d, n, seed=seed_val)
+            G = generate_coprime_cycles_graph(n)
+            
             random.shuffle(elm)
             mapping =dict(zip(list(G.nodes), elm[0:n]))
             G = nx.relabel_nodes(G, mapping)
@@ -152,7 +172,7 @@ if st.button("Generate Graph"):
 
             # Draw graph
             fig, ax = plt.subplots(figsize=(6, 6))
-            nx.draw_circular(G, with_labels=True, node_color = node_colours, edge_color="gray", node_size=nsize, ax=ax)
+            nx.draw_circular(G, with_labels=True, node_color = node_colours, edge_color="gray", node_size=nsize, ax=ax, arrows = True)
             st.pyplot(fig)
 
             st.success(f"Seed used: `{seed_used}`")
