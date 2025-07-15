@@ -148,7 +148,6 @@ if method == 'Random':
 
 # User input
     n = st.number_input("Number of nodes (n)", min_value=1, value=10)
-    d = st.number_input("Degree of each node (d)", min_value=0, value=2)
     elm = list(element_colors.keys())
 
 else:
@@ -169,6 +168,7 @@ else:
 
     elm = elements
     element_colors = dict(zip(elm, colors))
+    n = len(elm)
 
 nsize = st.number_input("Degree of each node (d)", min_value=0, value=2000)
 
@@ -177,12 +177,7 @@ seed_val = st.sidebar.number_input("Seed value", min_value=0, value=42, step=1, 
 
 # Button to generate graph
 if st.button("Generate Graph"):
-    # Check if a regular graph is possible
-    if n * d % 2 != 0:
-        st.error("❌ Invalid input: n * d must be even for a regular graph to exist.")
-    elif d >= n:
-        st.error("❌ Invalid input: Degree must be less than the number of nodes.")
-    else:
+    
         try:
             if use_seed:
                 seed_used = seed_val 
