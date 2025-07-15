@@ -1,4 +1,4 @@
-iimport streamlit as st
+import streamlit as st
 import networkx as nx
 import matplotlib.pyplot as plt
 import io
