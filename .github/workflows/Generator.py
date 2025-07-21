@@ -5,105 +5,40 @@ import io
 import random
 from math import gcd
 
-element_colors = {
-    "Fire": "red",
-    "Water": "blue",
-    "Earth": "saddlebrown",
-    "Air": "skyblue",
-    "Light": "lightyellow",
-    "Dark": "gray",
-    "Metal": "lightgray",
-    "Crystal": "cyan",
-    "Ice": "lightblue",
-    "Lightning": "gold",
-    "Steam": "gainsboro",
-    "Magma": "tomato",
-    "Shadow": "dimgray",
-    "Holy": "ivory",
-    "Poison": "yellowgreen",
-    "Nature": "green",
-    "Void": "purple",
-    "Chaos": "orchid",
-    "Order": "beige",
-    "Plasma": "deeppink",
-    "Wood": "peru",
-    "Glass": "lavender",
-    "Sand": "tan",
-    "Ash": "darkgray",
-    "Smoke": "slategray",
-    "Aether": "mediumorchid",
-    "Blood": "darkred",
-    "Spirit": "mediumpurple",
-    "Sound": "mediumseagreen",
-    "Energy": "orange",
-    "Radiance": "lightgoldenrodyellow",
-    "Frost": "powderblue",
-    "Corruption": "darkmagenta",
-    "Dream": "thistle",
-    "Gravity": "dimgray",
-    "Echo": "silver",
-    "Pulse": "hotpink",
-    "Acid": "greenyellow",
-    "Venom": "olivedrab",
-    "Flame": "darkorange",
-    "Mist": "whitesmoke",
-    "Obsidian": "black",
-    "Lava": "orangered",  # Not allowed! → change to "tomato"
-    "Storm": "slategray",
-    "Stone": "sienna",
-    "Fog": "lightgray",
-    "Quake": "rosybrown",
-    "Ink": "navy",
-    "Force": "slateblue",
-    "Moon": "khaki",
-    "Sun": "gold",
-    "Star": "lightyellow",
-    "Dust": "burlywood",
-    "Ether": "blueviolet",
-    "Spark": "darkorange",
-    "Chill": "paleturquoise",
-    "Metallic": "lightsteelblue",
-    "Gale": "lightblue",
-    "Thorn": "darkolivegreen",
-    "Toxin": "yellowgreen",
-    "Arcane": "mediumslateblue",
-    "Blessing": "lemonchiffon",
-    "Curse": "indigo",
-    "Fear": "dimgray",
-    "Hope": "honeydew",
-    "Glory": "gold",
-    "Decay": "sienna",
-    "Silence": "lightgray",
-    "Illusion": "lavender",
-    "Reality": "beige",
-    "Time": "darkgray",
-    "Space": "midnightblue",
-    "Memory": "mistyrose",
-    "Glow": "cornsilk",
-    "Rift": "blueviolet",
-    "Nether": "darkslategray",
-    "Specter": "lightslategray",
-    "Flare": "coral",
-    "Breeze": "lightcyan",
-    "Haze": "lightgray",
-    "Blight": "darkolivegreen",
-    "Wisp": "aliceblue",
-    "Tide": "steelblue",
-    "Tempest": "slategray",
-    "Whirlwind": "lightblue",
-    "Charm": "lightpink",
-    "Envy": "limegreen",
-    "Greed": "darkseagreen",
-    "Wrath": "firebrick",
-    "Lust": "crimson",
-    "Serenity": "azure",
-    "Unity": "mintcream",
-    "Balance": "ghostwhite",
-    "Fate": "plum",
-    "Truth": "ivory",
-    "Myth": "thistle",
-    "Shatter": "gainsboro"
+physical_elements = {
+    "Fire": "red", "Water": "blue", "Earth": "saddlebrown", "Air": "skyblue", "Metal": "gray",
+    "Crystal": "cyan", "Ice": "lightblue", "Lava": "orangered", "Sand": "tan", "Mud": "burlywood",
+    "Wood": "peru", "Lightning": "gold", "Steam": "lightgray", "Smoke": "dimgray", "Ash": "darkgray",
+    "Stone": "slategray", "Salt": "whitesmoke", "Clay": "chocolate", "Dust": "lightgrey", "Snow": "azure"
 }
+conceptual_elements = {
+    "Hope": "lightyellow", "Fear": "darkred", "Love": "deeppink", "Hate": "black", "Wisdom": "navy",
+    "Madness": "purple", "Peace": "lightblue", "Chaos": "orange", "Order": "lightgray", "Science": "green"
+}
+combined_elements = {**physical_elements, **conceptual_elements}
+physical_living_elements = {
+    "Fire": "red", "Water": "blue", "Earth": "saddlebrown", "Air": "skyblue", "Metal": "gray",
+    "Tree": "forestgreen", "Leaf": "mediumseagreen", "Blood": "crimson", "Bone": "ivory", "Fur": "lightgray",
+    "Feather": "lavender", "Wing": "skyblue", "Eye": "blue", "Heart": "firebrick", "Skin": "navajowhite",
+    "Hair": "gray", "Seed": "wheat", "Vine": "olivedrab", "Moss": "lightgreen", "Flower": "orchid",
+    "Petal": "pink"
+}
+random_weird_elements = {
+    "Christmas": "red", "Box": "saddlebrown", "Engine": "dimgray", "Basement": "gray", "Constitution": "gold",
+    "WiFi": "blue", "Homework": "lightpink", "Alarm": "crimson", "Pillow": "ivory", "Mustache": "sienna",
+    "Caffeine": "darkorange", "Toilet": "gainsboro", "Meme": "hotpink", "Cringe": "plum", "Lecture": "slategray",
+    "Printer": "silver", "Cupcake": "lightyellow", "Boredom": "gray", "Treadmill": "lightslategray", "Banana": "gold"
+}
+
+# --- Element Sets ---
+element_sets = {
+    "Physical Elements": physical_elements,
+    "Conceptual Elements": conceptual_elements,
+    "Combined Elements": combined_elements,
+    "Physical + Living Elements": physical_living_elements,
+    "Random Weird Elements": random_weird_elements
+}
+
 
 def generate_coprime_cycles_graph(n, unique=True):
     G = nx.DiGraph()
@@ -141,7 +76,8 @@ st.title("🎲 Elemental Cycles Generator")
 st.markdown("""
 This app generates a random set of elemental cycles
 """)
-
+set_choice = st.selectbox("Choose an element set", list(element_sets.keys()))
+element_colors = element_sets[set_choice]
 method = st.radio("Choose how to define elements:", ["Random", "Custom Input"])
 
 if method == 'Random':
