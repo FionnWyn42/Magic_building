@@ -136,11 +136,10 @@ def generate_coprime_cycles_graph(n, unique=True):
 
 st.set_page_config(page_title="Random Regular Graph Generator", layout="centered")
 
-st.title("🎲 Random Regular Graph Generator")
+st.title("🎲 Ekemental Cycles Generator")
 
 st.markdown("""
-This app generates a **random regular graph** based on the number of nodes (`n`) and the degree (`d`).
-- A *d*-regular graph is one where each node has exactly *d* connections.
+This app generates a random set of elemental cycles
 """)
 
 method = st.radio("Choose how to define elements:", ["Random", "Custom Input"])
@@ -217,7 +216,12 @@ if st.button("Generate Graph"):
            "absorbing",
            "balancing",
            "draining",
-           "transforming"
+           "transforming",
+           "refining",
+           "obliterating"
+           "despising",
+           "hatred"
+        
              ]
             for j, cycle in enumerate(cycles):
                 map_c = [mapping[c] for c in cycle]
