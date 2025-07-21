@@ -423,7 +423,7 @@ random_weird_elements = {
 
 
 
-default_elements = 
+default_elements = {
     "fire": "red",
     "Water": "blue",
     "Earth": "saddlebrown",
