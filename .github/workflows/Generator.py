@@ -136,7 +136,7 @@ def generate_coprime_cycles_graph(n, unique=True):
 
 st.set_page_config(page_title="Random Regular Graph Generator", layout="centered")
 
-st.title("🎲 Ekemental Cycles Generator")
+st.title("🎲 Elemental Cycles Generator")
 
 st.markdown("""
 This app generates a random set of elemental cycles
@@ -170,7 +170,7 @@ else:
     element_colors = dict(zip(elm, colors))
     n = len(elm)
 
-nsize = st.number_input("Degree of each node (d)", min_value=0, value=2000)
+nsize = st.number_input("Size of Node", min_value=0, value=2000)
 
 use_seed = st.sidebar.checkbox("Use seed")
 seed_val = st.sidebar.number_input("Seed value", min_value=0, value=42, step=1, disabled=not use_seed)
