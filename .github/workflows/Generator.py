@@ -216,7 +216,6 @@ conceptual_elements = {
 }
 
 
-combined_elements = {**physical_elements, **conceptual_elements}
 physical_living_elements = {
     "Fire": "red",
     "Water": "blue",
@@ -326,15 +325,20 @@ random_weird_elements = {
     "Printer": "silver", "Cupcake": "lightyellow", "Boredom": "gray", "Treadmill": "lightslategray", "Banana": "gold"
 }
 
+
+
+
+combined_elements = {**physical_elements, **conceptual_elements, **physical_living_elements, **random_weird_elements}
+
+
 # --- Element Sets ---
 element_sets = {
     "Physical Elements": physical_elements,
     "Conceptual Elements": conceptual_elements,
-    "Combined Elements": combined_elements,
     "Physical + Living Elements": physical_living_elements,
-    "Random Weird Elements": random_weird_elements
+    "Random Weird Elements": random_weird_elements,
+    "Combined Elements": combined_elements
 }
-
 
 def generate_coprime_cycles_graph(n, unique=True):
     G = nx.DiGraph()
